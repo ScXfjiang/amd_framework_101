@@ -1,8 +1,10 @@
+from datetime import datetime
+
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import optimizers
-from datetime import datetime
 import keras
+
 from demo_cnn import build_demo_cnn
 
 logdir = "logs/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
