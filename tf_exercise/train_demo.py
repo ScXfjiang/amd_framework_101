@@ -28,6 +28,8 @@ model.fit(
     validation_data=(test_images, test_labels),
 )
 
+model.save('./demo.h5')
+
 # inference
 new_images = np.random.random((10, 224, 224, 3))  # Simulate 10 new images
 predictions = model.predict(new_images)
