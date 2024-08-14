@@ -1,8 +1,8 @@
 import tensorflow as tf
-from tensorflow.keras import layers, models, optimizers
+from tensorflow.keras import layers, models
 
 
-def build_alexnet(input_shape=(224, 224, 3), num_classes=10):
+def build_demo_cnn(input_shape=(224, 224, 3), num_classes=10):
     model = models.Sequential()
 
     # Layer 1: Convolutional, Batch Normalization, ReLU, and Max Pooling
