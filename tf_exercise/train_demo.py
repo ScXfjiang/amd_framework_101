@@ -1,7 +1,12 @@
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import optimizers
+from datetime import datetime
+import keras
 from demo_cnn import build_demo_cnn
+
+logdir = "logs/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
 
 model = build_demo_cnn()
 model.compile(
@@ -26,12 +31,8 @@ model.fit(
     batch_size=32,
     epochs=10,
     validation_data=(test_images, test_labels),
+    callbacks=[tensorboard_callback],
 )
 
-model.save('./demo.h5')
+model.save("./demo.h5")
 
-# inference
-new_images = np.random.random((10, 224, 224, 3))  # Simulate 10 new images
-predictions = model.predict(new_images)
-labels = np.argmax(predictions, axis=1)
-print(labels)
