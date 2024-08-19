@@ -1,6 +1,6 @@
 import os
 os.environ['TF_XLA_FLAGS'] = '--tf_xla_auto_jit=2'
-os.environ['XLA_FLAGS'] = '--xla_dump_to=./generated'
+os.environ['XLA_FLAGS'] = '--xla_dump_to=./generated --xla_dump_hlo_as_dot'
 os.environ['TF_DUMP_GRAPH_PREFIX'] = './generated'
 
 import tempfile
