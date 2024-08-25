@@ -1,0 +1,822 @@
+
+vector_add:	file format elf64-x86-64
+
+Disassembly of section .text:
+
+0000000000210730 <_start>:
+  210730: f3 0f 1e fa                  	endbr64
+  210734: 31 ed                        	xorl	%ebp, %ebp
+  210736: 49 89 d1                     	movq	%rdx, %r9
+  210739: 5e                           	popq	%rsi
+  21073a: 48 89 e2                     	movq	%rsp, %rdx
+  21073d: 48 83 e4 f0                  	andq	$-0x10, %rsp
+  210741: 50                           	pushq	%rax
+  210742: 54                           	pushq	%rsp
+  210743: 4c 8d 05 b6 09 00 00         	leaq	0x9b6(%rip), %r8        # 0x211100 <__libc_csu_fini>
+  21074a: 48 8d 0d 3f 09 00 00         	leaq	0x93f(%rip), %rcx       # 0x211090 <__libc_csu_init>
+  210751: 48 8d 3d 38 01 00 00         	leaq	0x138(%rip), %rdi       # 0x210890 <main>
+  210758: ff 15 c2 1d 00 00            	callq	*0x1dc2(%rip)           # 0x212520 <vector_add.hip+0x212520>
+  21075e: f4                           	hlt
+  21075f: 90                           	nop
+
+0000000000210760 <_dl_relocate_static_pie>:
+  210760: f3 0f 1e fa                  	endbr64
+  210764: c3                           	retq
+
+0000000000210765 <__do_init>:
+  210765: f3 0f 1e fa                  	endbr64
+  210769: 55                           	pushq	%rbp
+  21076a: 48 89 e5                     	movq	%rsp, %rbp
+  21076d: 0f b6 05 0c 2f 00 00         	movzbl	0x2f0c(%rip), %eax      # 0x213680 <__initialized.1734>
+  210774: 0f b6 c0                     	movzbl	%al, %eax
+  210777: 48 85 c0                     	testq	%rax, %rax
+  21077a: 75 28                        	jne	0x2107a4 <__do_init+0x3f>
+  21077c: c6 05 fd 2e 00 00 01         	movb	$0x1, 0x2efd(%rip)      # 0x213680 <__initialized.1734>
+  210783: 48 8b 05 a6 1d 00 00         	movq	0x1da6(%rip), %rax      # 0x212530 <vector_add.hip+0x212530>
+  21078a: 48 85 c0                     	testq	%rax, %rax
+  21078d: 74 16                        	je	0x2107a5 <__do_init+0x40>
+  21078f: 48 8d 35 0a 2f 00 00         	leaq	0x2f0a(%rip), %rsi      # 0x2136a0 <__object.1737>
+  210796: 48 8d 3d c3 ed ff ff         	leaq	-0x123d(%rip), %rdi     # 0x20f560 <__EH_FRAME_LIST__>
+  21079d: e8 be 09 00 00               	callq	0x211160 <__register_frame_info@plt>
+  2107a2: eb 01                        	jmp	0x2107a5 <__do_init+0x40>
+  2107a4: 90                           	nop
+  2107a5: 5d                           	popq	%rbp
+  2107a6: c3                           	retq
+
+00000000002107a7 <__do_fini>:
+  2107a7: f3 0f 1e fa                  	endbr64
+  2107ab: 55                           	pushq	%rbp
+  2107ac: 48 89 e5                     	movq	%rsp, %rbp
+  2107af: 0f b6 05 2a 2f 00 00         	movzbl	0x2f2a(%rip), %eax      # 0x2136e0 <__finalized.1743>
+  2107b6: 0f b6 c0                     	movzbl	%al, %eax
+  2107b9: 48 85 c0                     	testq	%rax, %rax
+  2107bc: 75 3c                        	jne	0x2107fa <__do_fini+0x53>
+  2107be: c6 05 1b 2f 00 00 01         	movb	$0x1, 0x2f1b(%rip)      # 0x2136e0 <__finalized.1743>
+  2107c5: 48 8b 05 6c 1d 00 00         	movq	0x1d6c(%rip), %rax      # 0x212538 <vector_add.hip+0x212538>
+  2107cc: 48 85 c0                     	testq	%rax, %rax
+  2107cf: 74 0f                        	je	0x2107e0 <__do_fini+0x39>
+  2107d1: 48 8b 05 78 2d 00 00         	movq	0x2d78(%rip), %rax      # 0x213550 <__dso_handle>
+  2107d8: 48 89 c7                     	movq	%rax, %rdi
+  2107db: e8 90 09 00 00               	callq	0x211170 <__cxa_finalize@plt>
+  2107e0: 48 8b 05 59 1d 00 00         	movq	0x1d59(%rip), %rax      # 0x212540 <vector_add.hip+0x212540>
+  2107e7: 48 85 c0                     	testq	%rax, %rax
+  2107ea: 74 0f                        	je	0x2107fb <__do_fini+0x54>
+  2107ec: 48 8d 3d 6d ed ff ff         	leaq	-0x1293(%rip), %rdi     # 0x20f560 <__EH_FRAME_LIST__>
+  2107f3: e8 88 09 00 00               	callq	0x211180 <__deregister_frame_info@plt>
+  2107f8: eb 01                        	jmp	0x2107fb <__do_fini+0x54>
+  2107fa: 90                           	nop
+  2107fb: 5d                           	popq	%rbp
+  2107fc: c3                           	retq
+  2107fd: cc                           	int3
+  2107fe: cc                           	int3
+  2107ff: cc                           	int3
+
+0000000000210800 <_Z24__device_stub__AddArraysPfS_S_i>:
+  210800: 48 83 ec 78                  	subq	$0x78, %rsp
+  210804: 48 89 7c 24 48               	movq	%rdi, 0x48(%rsp)
+  210809: 48 89 74 24 40               	movq	%rsi, 0x40(%rsp)
+  21080e: 48 89 54 24 38               	movq	%rdx, 0x38(%rsp)
+  210813: 89 4c 24 04                  	movl	%ecx, 0x4(%rsp)
+  210817: 48 8d 44 24 48               	leaq	0x48(%rsp), %rax
+  21081c: 48 89 44 24 50               	movq	%rax, 0x50(%rsp)
+  210821: 48 8d 44 24 40               	leaq	0x40(%rsp), %rax
+  210826: 48 89 44 24 58               	movq	%rax, 0x58(%rsp)
+  21082b: 48 8d 44 24 38               	leaq	0x38(%rsp), %rax
+  210830: 48 89 44 24 60               	movq	%rax, 0x60(%rsp)
+  210835: 48 8d 44 24 04               	leaq	0x4(%rsp), %rax
+  21083a: 48 89 44 24 68               	movq	%rax, 0x68(%rsp)
+  21083f: 48 8d 7c 24 28               	leaq	0x28(%rsp), %rdi
+  210844: 48 8d 74 24 18               	leaq	0x18(%rsp), %rsi
+  210849: 48 8d 54 24 10               	leaq	0x10(%rsp), %rdx
+  21084e: 48 8d 4c 24 08               	leaq	0x8(%rsp), %rcx
+  210853: e8 38 09 00 00               	callq	0x211190 <__hipPopCallConfiguration@plt>
+  210858: 48 8b 74 24 28               	movq	0x28(%rsp), %rsi
+  21085d: 8b 54 24 30                  	movl	0x30(%rsp), %edx
+  210861: 48 8b 4c 24 18               	movq	0x18(%rsp), %rcx
+  210866: 44 8b 44 24 20               	movl	0x20(%rsp), %r8d
+  21086b: 4c 8d 4c 24 50               	leaq	0x50(%rsp), %r9
+  210870: bf 78 0e 20 00               	movl	$0x200e78, %edi         # imm = 0x200E78
+  210875: ff 74 24 08                  	pushq	0x8(%rsp)
+  210879: ff 74 24 18                  	pushq	0x18(%rsp)
+  21087d: e8 1e 09 00 00               	callq	0x2111a0 <hipLaunchKernel@plt>
+  210882: 48 81 c4 88 00 00 00         	addq	$0x88, %rsp
+  210889: c3                           	retq
+  21088a: 66 0f 1f 44 00 00            	nopw	(%rax,%rax)
+
+0000000000210890 <main>:
+  210890: 55                           	pushq	%rbp
+  210891: 41 57                        	pushq	%r15
+  210893: 41 56                        	pushq	%r14
+  210895: 41 55                        	pushq	%r13
+  210897: 41 54                        	pushq	%r12
+  210899: 53                           	pushq	%rbx
+  21089a: 48 81 ec 98 00 00 00         	subq	$0x98, %rsp
+  2108a1: bf 00 10 00 00               	movl	$0x1000, %edi           # imm = 0x1000
+  2108a6: e8 05 09 00 00               	callq	0x2111b0 <malloc@plt>
+  2108ab: 48 89 c3                     	movq	%rax, %rbx
+  2108ae: bf 00 10 00 00               	movl	$0x1000, %edi           # imm = 0x1000
+  2108b3: e8 f8 08 00 00               	callq	0x2111b0 <malloc@plt>
+  2108b8: 49 89 c6                     	movq	%rax, %r14
+  2108bb: bf 00 10 00 00               	movl	$0x1000, %edi           # imm = 0x1000
+  2108c0: e8 eb 08 00 00               	callq	0x2111b0 <malloc@plt>
+  2108c5: 49 89 c7                     	movq	%rax, %r15
+  2108c8: 66 0f 6f 05 80 05 ff ff      	movdqa	-0xfa80(%rip), %xmm0    # 0x200e50 <_IO_stdin_used+0x30>
+  2108d0: b8 04 00 00 00               	movl	$0x4, %eax
+  2108d5: 66 0f 6f 0d 83 05 ff ff      	movdqa	-0xfa7d(%rip), %xmm1    # 0x200e60 <_IO_stdin_used+0x40>
+  2108dd: 66 0f 6f 15 5b 05 ff ff      	movdqa	-0xfaa5(%rip), %xmm2    # 0x200e40 <_IO_stdin_used+0x20>
+  2108e5: 66 0f 6f d8                  	movdqa	%xmm0, %xmm3
+  2108e9: 0f 1f 80 00 00 00 00         	nopl	(%rax)
+  2108f0: 66 0f 6f e0                  	movdqa	%xmm0, %xmm4
+  2108f4: 66 0f fe e1                  	paddd	%xmm1, %xmm4
+  2108f8: 0f 5b e8                     	cvtdq2ps	%xmm0, %xmm5
+  2108fb: 0f 5b e4                     	cvtdq2ps	%xmm4, %xmm4
+  2108fe: 0f 11 6c 83 f0               	movups	%xmm5, -0x10(%rbx,%rax,4)
+  210903: 0f 11 24 83                  	movups	%xmm4, (%rbx,%rax,4)
+  210907: 66 0f 6f e3                  	movdqa	%xmm3, %xmm4
+  21090b: 66 0f fe e3                  	paddd	%xmm3, %xmm4
+  21090f: 0f 5b ec                     	cvtdq2ps	%xmm4, %xmm5
+  210912: 66 0f fe e2                  	paddd	%xmm2, %xmm4
+  210916: 0f 5b e4                     	cvtdq2ps	%xmm4, %xmm4
+  210919: 41 0f 11 6c 86 f0            	movups	%xmm5, -0x10(%r14,%rax,4)
+  21091f: 41 0f 11 24 86               	movups	%xmm4, (%r14,%rax,4)
+  210924: 66 0f fe c2                  	paddd	%xmm2, %xmm0
+  210928: 66 0f fe da                  	paddd	%xmm2, %xmm3
+  21092c: 48 83 c0 08                  	addq	$0x8, %rax
+  210930: 48 3d 04 04 00 00            	cmpq	$0x404, %rax            # imm = 0x404
+  210936: 75 b8                        	jne	0x2108f0 <main+0x60>
+  210938: 48 8d 7c 24 18               	leaq	0x18(%rsp), %rdi
+  21093d: be 00 10 00 00               	movl	$0x1000, %esi           # imm = 0x1000
+  210942: e8 79 08 00 00               	callq	0x2111c0 <hipMalloc@plt>
+  210947: 85 c0                        	testl	%eax, %eax
+  210949: 0f 85 62 03 00 00            	jne	0x210cb1 <main+0x421>
+  21094f: 48 8d 7c 24 10               	leaq	0x10(%rsp), %rdi
+  210954: be 00 10 00 00               	movl	$0x1000, %esi           # imm = 0x1000
+  210959: e8 62 08 00 00               	callq	0x2111c0 <hipMalloc@plt>
+  21095e: 85 c0                        	testl	%eax, %eax
+  210960: 0f 85 a5 03 00 00            	jne	0x210d0b <main+0x47b>
+  210966: 48 8d 7c 24 08               	leaq	0x8(%rsp), %rdi
+  21096b: be 00 10 00 00               	movl	$0x1000, %esi           # imm = 0x1000
+  210970: e8 4b 08 00 00               	callq	0x2111c0 <hipMalloc@plt>
+  210975: 85 c0                        	testl	%eax, %eax
+  210977: 0f 85 e8 03 00 00            	jne	0x210d65 <main+0x4d5>
+  21097d: 48 8b 7c 24 18               	movq	0x18(%rsp), %rdi
+  210982: ba 00 10 00 00               	movl	$0x1000, %edx           # imm = 0x1000
+  210987: 48 89 de                     	movq	%rbx, %rsi
+  21098a: b9 01 00 00 00               	movl	$0x1, %ecx
+  21098f: e8 3c 08 00 00               	callq	0x2111d0 <hipMemcpy@plt>
+  210994: 85 c0                        	testl	%eax, %eax
+  210996: 0f 85 23 04 00 00            	jne	0x210dbf <main+0x52f>
+  21099c: 48 8b 7c 24 10               	movq	0x10(%rsp), %rdi
+  2109a1: ba 00 10 00 00               	movl	$0x1000, %edx           # imm = 0x1000
+  2109a6: 4c 89 f6                     	movq	%r14, %rsi
+  2109a9: b9 01 00 00 00               	movl	$0x1, %ecx
+  2109ae: e8 1d 08 00 00               	callq	0x2111d0 <hipMemcpy@plt>
+  2109b3: 85 c0                        	testl	%eax, %eax
+  2109b5: 0f 85 5e 04 00 00            	jne	0x210e19 <main+0x589>
+  2109bb: 48 bf 04 00 00 00 01 00 00 00	movabsq	$0x100000004, %rdi      # imm = 0x100000004
+  2109c5: 48 8d 97 fc 00 00 00         	leaq	0xfc(%rdi), %rdx
+  2109cc: be 01 00 00 00               	movl	$0x1, %esi
+  2109d1: b9 01 00 00 00               	movl	$0x1, %ecx
+  2109d6: 45 31 c0                     	xorl	%r8d, %r8d
+  2109d9: 45 31 c9                     	xorl	%r9d, %r9d
+  2109dc: e8 ff 07 00 00               	callq	0x2111e0 <__hipPushCallConfiguration@plt>
+  2109e1: 85 c0                        	testl	%eax, %eax
+  2109e3: 0f 85 9b 00 00 00            	jne	0x210a84 <main+0x1f4>
+  2109e9: 48 8b 44 24 18               	movq	0x18(%rsp), %rax
+  2109ee: 48 8b 4c 24 10               	movq	0x10(%rsp), %rcx
+  2109f3: 48 8b 54 24 08               	movq	0x8(%rsp), %rdx
+  2109f8: 48 89 44 24 68               	movq	%rax, 0x68(%rsp)
+  2109fd: 48 89 4c 24 60               	movq	%rcx, 0x60(%rsp)
+  210a02: 48 89 54 24 58               	movq	%rdx, 0x58(%rsp)
+  210a07: c7 44 24 24 00 04 00 00      	movl	$0x400, 0x24(%rsp)      # imm = 0x400
+  210a0f: 48 8d 44 24 68               	leaq	0x68(%rsp), %rax
+  210a14: 48 89 44 24 70               	movq	%rax, 0x70(%rsp)
+  210a19: 48 8d 44 24 60               	leaq	0x60(%rsp), %rax
+  210a1e: 48 89 44 24 78               	movq	%rax, 0x78(%rsp)
+  210a23: 48 8d 44 24 58               	leaq	0x58(%rsp), %rax
+  210a28: 48 89 84 24 80 00 00 00      	movq	%rax, 0x80(%rsp)
+  210a30: 48 8d 44 24 24               	leaq	0x24(%rsp), %rax
+  210a35: 48 89 84 24 88 00 00 00      	movq	%rax, 0x88(%rsp)
+  210a3d: 48 8d 7c 24 48               	leaq	0x48(%rsp), %rdi
+  210a42: 48 8d 74 24 38               	leaq	0x38(%rsp), %rsi
+  210a47: 48 8d 54 24 30               	leaq	0x30(%rsp), %rdx
+  210a4c: 48 8d 4c 24 28               	leaq	0x28(%rsp), %rcx
+  210a51: e8 3a 07 00 00               	callq	0x211190 <__hipPopCallConfiguration@plt>
+  210a56: 48 8b 74 24 48               	movq	0x48(%rsp), %rsi
+  210a5b: 8b 54 24 50                  	movl	0x50(%rsp), %edx
+  210a5f: 48 8b 4c 24 38               	movq	0x38(%rsp), %rcx
+  210a64: 44 8b 44 24 40               	movl	0x40(%rsp), %r8d
+  210a69: 4c 8d 4c 24 70               	leaq	0x70(%rsp), %r9
+  210a6e: bf 78 0e 20 00               	movl	$0x200e78, %edi         # imm = 0x200E78
+  210a73: ff 74 24 28                  	pushq	0x28(%rsp)
+  210a77: ff 74 24 38                  	pushq	0x38(%rsp)
+  210a7b: e8 20 07 00 00               	callq	0x2111a0 <hipLaunchKernel@plt>
+  210a80: 48 83 c4 10                  	addq	$0x10, %rsp
+  210a84: 48 8b 74 24 08               	movq	0x8(%rsp), %rsi
+  210a89: ba 00 10 00 00               	movl	$0x1000, %edx           # imm = 0x1000
+  210a8e: 4c 89 ff                     	movq	%r15, %rdi
+  210a91: b9 02 00 00 00               	movl	$0x2, %ecx
+  210a96: e8 35 07 00 00               	callq	0x2111d0 <hipMemcpy@plt>
+  210a9b: 85 c0                        	testl	%eax, %eax
+  210a9d: 0f 85 d0 03 00 00            	jne	0x210e73 <main+0x5e3>
+  210aa3: 41 bc 01 00 00 00            	movl	$0x1, %r12d
+  210aa9: 0f 28 05 80 03 ff ff         	movaps	-0xfc80(%rip), %xmm0    # 0x200e30 <_IO_stdin_used+0x10>
+  210ab0: f2 0f 10 0d b8 03 ff ff      	movsd	-0xfc48(%rip), %xmm1    # xmm1 = mem[0],zero
+                                                                        # 0x200e70 <_IO_stdin_used+0x50>
+  210ab8: 0f 1f 84 00 00 00 00 00      	nopl	(%rax,%rax)
+  210ac0: f3 43 0f 10 54 a7 fc         	movss	-0x4(%r15,%r12,4), %xmm2 # xmm2 = mem[0],zero,zero,zero
+  210ac7: f3 42 0f 10 5c a3 fc         	movss	-0x4(%rbx,%r12,4), %xmm3 # xmm3 = mem[0],zero,zero,zero
+  210ace: f3 43 0f 58 5c a6 fc         	addss	-0x4(%r14,%r12,4), %xmm3
+  210ad5: f3 0f 5c d3                  	subss	%xmm3, %xmm2
+  210ad9: 0f 54 d0                     	andps	%xmm0, %xmm2
+  210adc: f3 0f 5a d2                  	cvtss2sd	%xmm2, %xmm2
+  210ae0: 66 0f 2e d1                  	ucomisd	%xmm1, %xmm2
+  210ae4: 77 76                        	ja	0x210b5c <main+0x2cc>
+  210ae6: f3 43 0f 10 14 a7            	movss	(%r15,%r12,4), %xmm2    # xmm2 = mem[0],zero,zero,zero
+  210aec: f3 42 0f 10 1c a3            	movss	(%rbx,%r12,4), %xmm3    # xmm3 = mem[0],zero,zero,zero
+  210af2: f3 43 0f 58 1c a6            	addss	(%r14,%r12,4), %xmm3
+  210af8: f3 0f 5c d3                  	subss	%xmm3, %xmm2
+  210afc: 0f 54 d0                     	andps	%xmm0, %xmm2
+  210aff: f3 0f 5a d2                  	cvtss2sd	%xmm2, %xmm2
+  210b03: 66 0f 2e d1                  	ucomisd	%xmm1, %xmm2
+  210b07: 77 56                        	ja	0x210b5f <main+0x2cf>
+  210b09: 49 83 c4 02                  	addq	$0x2, %r12
+  210b0d: 49 81 fc 01 04 00 00         	cmpq	$0x401, %r12            # imm = 0x401
+  210b14: 75 aa                        	jne	0x210ac0 <main+0x230>
+  210b16: bf 00 37 21 00               	movl	$0x213700, %edi         # imm = 0x213700
+  210b1b: be a7 0e 20 00               	movl	$0x200ea7, %esi         # imm = 0x200EA7
+  210b20: ba 1a 00 00 00               	movl	$0x1a, %edx
+  210b25: e8 c6 06 00 00               	callq	0x2111f0 <_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l@plt>
+  210b2a: 48 8b 05 cf 2b 00 00         	movq	0x2bcf(%rip), %rax      # 0x213700 <_ZSt4cout>
+  210b31: 48 8b 40 e8                  	movq	-0x18(%rax), %rax
+  210b35: 4c 8b a0 f0 37 21 00         	movq	0x2137f0(%rax), %r12
+  210b3c: 4d 85 e4                     	testq	%r12, %r12
+  210b3f: 0f 84 88 03 00 00            	je	0x210ecd <main+0x63d>
+  210b45: 41 80 7c 24 38 00            	cmpb	$0x0, 0x38(%r12)
+  210b4b: 0f 84 d2 00 00 00            	je	0x210c23 <main+0x393>
+  210b51: 41 0f b6 44 24 43            	movzbl	0x43(%r12), %eax
+  210b57: e9 de 00 00 00               	jmp	0x210c3a <main+0x3aa>
+  210b5c: 49 ff cc                     	decq	%r12
+  210b5f: 45 89 e5                     	movl	%r12d, %r13d
+  210b62: 49 c1 e5 02                  	shlq	$0x2, %r13
+  210b66: bf 00 37 21 00               	movl	$0x213700, %edi         # imm = 0x213700
+  210b6b: be c2 0e 20 00               	movl	$0x200ec2, %esi         # imm = 0x200EC2
+  210b70: ba 0f 00 00 00               	movl	$0xf, %edx
+  210b75: e8 76 06 00 00               	callq	0x2111f0 <_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l@plt>
+  210b7a: bf 00 37 21 00               	movl	$0x213700, %edi         # imm = 0x213700
+  210b7f: 44 89 e6                     	movl	%r12d, %esi
+  210b82: e8 79 06 00 00               	callq	0x211200 <_ZNSolsEi@plt>
+  210b87: 49 89 c4                     	movq	%rax, %r12
+  210b8a: be d8 0e 20 00               	movl	$0x200ed8, %esi         # imm = 0x200ED8
+  210b8f: ba 02 00 00 00               	movl	$0x2, %edx
+  210b94: 48 89 c7                     	movq	%rax, %rdi
+  210b97: e8 54 06 00 00               	callq	0x2111f0 <_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l@plt>
+  210b9c: f3 43 0f 10 04 2f            	movss	(%r15,%r13), %xmm0      # xmm0 = mem[0],zero,zero,zero
+  210ba2: f3 0f 5a c0                  	cvtss2sd	%xmm0, %xmm0
+  210ba6: 4c 89 e7                     	movq	%r12, %rdi
+  210ba9: e8 62 06 00 00               	callq	0x211210 <_ZNSo9_M_insertIdEERSoT_@plt>
+  210bae: 49 89 c4                     	movq	%rax, %r12
+  210bb1: be db 0e 20 00               	movl	$0x200edb, %esi         # imm = 0x200EDB
+  210bb6: ba 04 00 00 00               	movl	$0x4, %edx
+  210bbb: 48 89 c7                     	movq	%rax, %rdi
+  210bbe: e8 2d 06 00 00               	callq	0x2111f0 <_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l@plt>
+  210bc3: f3 42 0f 10 04 2b            	movss	(%rbx,%r13), %xmm0      # xmm0 = mem[0],zero,zero,zero
+  210bc9: f3 43 0f 58 04 2e            	addss	(%r14,%r13), %xmm0
+  210bcf: f3 0f 5a c0                  	cvtss2sd	%xmm0, %xmm0
+  210bd3: 4c 89 e7                     	movq	%r12, %rdi
+  210bd6: e8 35 06 00 00               	callq	0x211210 <_ZNSo9_M_insertIdEERSoT_@plt>
+  210bdb: 49 89 c4                     	movq	%rax, %r12
+  210bde: 48 8b 00                     	movq	(%rax), %rax
+  210be1: 48 8b 40 e8                  	movq	-0x18(%rax), %rax
+  210be5: 4d 8b ac 04 f0 00 00 00      	movq	0xf0(%r12,%rax), %r13
+  210bed: 4d 85 ed                     	testq	%r13, %r13
+  210bf0: 0f 84 d7 02 00 00            	je	0x210ecd <main+0x63d>
+  210bf6: 41 80 7d 38 00               	cmpb	$0x0, 0x38(%r13)
+  210bfb: 74 07                        	je	0x210c04 <main+0x374>
+  210bfd: 41 0f b6 45 43               	movzbl	0x43(%r13), %eax
+  210c02: eb 17                        	jmp	0x210c1b <main+0x38b>
+  210c04: 4c 89 ef                     	movq	%r13, %rdi
+  210c07: e8 14 06 00 00               	callq	0x211220 <_ZNKSt5ctypeIcE13_M_widen_initEv@plt>
+  210c0c: 49 8b 45 00                  	movq	(%r13), %rax
+  210c10: 4c 89 ef                     	movq	%r13, %rdi
+  210c13: be 0a 00 00 00               	movl	$0xa, %esi
+  210c18: ff 50 30                     	callq	*0x30(%rax)
+  210c1b: 0f be f0                     	movsbl	%al, %esi
+  210c1e: 4c 89 e7                     	movq	%r12, %rdi
+  210c21: eb 1f                        	jmp	0x210c42 <main+0x3b2>
+  210c23: 4c 89 e7                     	movq	%r12, %rdi
+  210c26: e8 f5 05 00 00               	callq	0x211220 <_ZNKSt5ctypeIcE13_M_widen_initEv@plt>
+  210c2b: 49 8b 04 24                  	movq	(%r12), %rax
+  210c2f: 4c 89 e7                     	movq	%r12, %rdi
+  210c32: be 0a 00 00 00               	movl	$0xa, %esi
+  210c37: ff 50 30                     	callq	*0x30(%rax)
+  210c3a: 0f be f0                     	movsbl	%al, %esi
+  210c3d: bf 00 37 21 00               	movl	$0x213700, %edi         # imm = 0x213700
+  210c42: e8 e9 05 00 00               	callq	0x211230 <_ZNSo3putEc@plt>
+  210c47: 48 89 c7                     	movq	%rax, %rdi
+  210c4a: e8 f1 05 00 00               	callq	0x211240 <_ZNSo5flushEv@plt>
+  210c4f: 48 8b 7c 24 18               	movq	0x18(%rsp), %rdi
+  210c54: e8 f7 05 00 00               	callq	0x211250 <hipFree@plt>
+  210c59: 85 c0                        	testl	%eax, %eax
+  210c5b: 0f 85 71 02 00 00            	jne	0x210ed2 <main+0x642>
+  210c61: 48 8b 7c 24 10               	movq	0x10(%rsp), %rdi
+  210c66: e8 e5 05 00 00               	callq	0x211250 <hipFree@plt>
+  210c6b: 85 c0                        	testl	%eax, %eax
+  210c6d: 0f 85 b9 02 00 00            	jne	0x210f2c <main+0x69c>
+  210c73: 48 8b 7c 24 08               	movq	0x8(%rsp), %rdi
+  210c78: e8 d3 05 00 00               	callq	0x211250 <hipFree@plt>
+  210c7d: 85 c0                        	testl	%eax, %eax
+  210c7f: 0f 85 fe 02 00 00            	jne	0x210f83 <main+0x6f3>
+  210c85: 48 89 df                     	movq	%rbx, %rdi
+  210c88: e8 d3 05 00 00               	callq	0x211260 <free@plt>
+  210c8d: 4c 89 f7                     	movq	%r14, %rdi
+  210c90: e8 cb 05 00 00               	callq	0x211260 <free@plt>
+  210c95: 4c 89 ff                     	movq	%r15, %rdi
+  210c98: e8 c3 05 00 00               	callq	0x211260 <free@plt>
+  210c9d: 31 c0                        	xorl	%eax, %eax
+  210c9f: 48 81 c4 98 00 00 00         	addq	$0x98, %rsp
+  210ca6: 5b                           	popq	%rbx
+  210ca7: 41 5c                        	popq	%r12
+  210ca9: 41 5d                        	popq	%r13
+  210cab: 41 5e                        	popq	%r14
+  210cad: 41 5f                        	popq	%r15
+  210caf: 5d                           	popq	%rbp
+  210cb0: c3                           	retq
+  210cb1: 89 c5                        	movl	%eax, %ebp
+  210cb3: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210cb8: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210cbd: e8 ae 05 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210cc2: 48 89 c3                     	movq	%rax, %rbx
+  210cc5: 89 ef                        	movl	%ebp, %edi
+  210cc7: e8 b4 05 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210ccc: 48 89 df                     	movq	%rbx, %rdi
+  210ccf: 48 89 c6                     	movq	%rax, %rsi
+  210cd2: e8 99 05 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210cd7: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210cdc: 48 89 c7                     	movq	%rax, %rdi
+  210cdf: e8 8c 05 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210ce4: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210ce9: 48 89 c7                     	movq	%rax, %rdi
+  210cec: e8 7f 05 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210cf1: 48 89 c7                     	movq	%rax, %rdi
+  210cf4: be 3a 00 00 00               	movl	$0x3a, %esi
+  210cf9: e8 92 05 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210cfe: 48 89 c7                     	movq	%rax, %rdi
+  210d01: be 27 00 00 00               	movl	$0x27, %esi
+  210d06: e9 cd 02 00 00               	jmp	0x210fd8 <main+0x748>
+  210d0b: 89 c5                        	movl	%eax, %ebp
+  210d0d: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210d12: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210d17: e8 54 05 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210d1c: 48 89 c3                     	movq	%rax, %rbx
+  210d1f: 89 ef                        	movl	%ebp, %edi
+  210d21: e8 5a 05 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210d26: 48 89 df                     	movq	%rbx, %rdi
+  210d29: 48 89 c6                     	movq	%rax, %rsi
+  210d2c: e8 3f 05 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210d31: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210d36: 48 89 c7                     	movq	%rax, %rdi
+  210d39: e8 32 05 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210d3e: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210d43: 48 89 c7                     	movq	%rax, %rdi
+  210d46: e8 25 05 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210d4b: 48 89 c7                     	movq	%rax, %rdi
+  210d4e: be 3a 00 00 00               	movl	$0x3a, %esi
+  210d53: e8 38 05 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210d58: 48 89 c7                     	movq	%rax, %rdi
+  210d5b: be 28 00 00 00               	movl	$0x28, %esi
+  210d60: e9 73 02 00 00               	jmp	0x210fd8 <main+0x748>
+  210d65: 89 c5                        	movl	%eax, %ebp
+  210d67: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210d6c: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210d71: e8 fa 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210d76: 48 89 c3                     	movq	%rax, %rbx
+  210d79: 89 ef                        	movl	%ebp, %edi
+  210d7b: e8 00 05 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210d80: 48 89 df                     	movq	%rbx, %rdi
+  210d83: 48 89 c6                     	movq	%rax, %rsi
+  210d86: e8 e5 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210d8b: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210d90: 48 89 c7                     	movq	%rax, %rdi
+  210d93: e8 d8 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210d98: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210d9d: 48 89 c7                     	movq	%rax, %rdi
+  210da0: e8 cb 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210da5: 48 89 c7                     	movq	%rax, %rdi
+  210da8: be 3a 00 00 00               	movl	$0x3a, %esi
+  210dad: e8 de 04 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210db2: 48 89 c7                     	movq	%rax, %rdi
+  210db5: be 29 00 00 00               	movl	$0x29, %esi
+  210dba: e9 19 02 00 00               	jmp	0x210fd8 <main+0x748>
+  210dbf: 89 c5                        	movl	%eax, %ebp
+  210dc1: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210dc6: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210dcb: e8 a0 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210dd0: 48 89 c3                     	movq	%rax, %rbx
+  210dd3: 89 ef                        	movl	%ebp, %edi
+  210dd5: e8 a6 04 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210dda: 48 89 df                     	movq	%rbx, %rdi
+  210ddd: 48 89 c6                     	movq	%rax, %rsi
+  210de0: e8 8b 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210de5: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210dea: 48 89 c7                     	movq	%rax, %rdi
+  210ded: e8 7e 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210df2: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210df7: 48 89 c7                     	movq	%rax, %rdi
+  210dfa: e8 71 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210dff: 48 89 c7                     	movq	%rax, %rdi
+  210e02: be 3a 00 00 00               	movl	$0x3a, %esi
+  210e07: e8 84 04 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210e0c: 48 89 c7                     	movq	%rax, %rdi
+  210e0f: be 2c 00 00 00               	movl	$0x2c, %esi
+  210e14: e9 bf 01 00 00               	jmp	0x210fd8 <main+0x748>
+  210e19: 89 c5                        	movl	%eax, %ebp
+  210e1b: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210e20: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210e25: e8 46 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210e2a: 48 89 c3                     	movq	%rax, %rbx
+  210e2d: 89 ef                        	movl	%ebp, %edi
+  210e2f: e8 4c 04 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210e34: 48 89 df                     	movq	%rbx, %rdi
+  210e37: 48 89 c6                     	movq	%rax, %rsi
+  210e3a: e8 31 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210e3f: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210e44: 48 89 c7                     	movq	%rax, %rdi
+  210e47: e8 24 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210e4c: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210e51: 48 89 c7                     	movq	%rax, %rdi
+  210e54: e8 17 04 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210e59: 48 89 c7                     	movq	%rax, %rdi
+  210e5c: be 3a 00 00 00               	movl	$0x3a, %esi
+  210e61: e8 2a 04 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210e66: 48 89 c7                     	movq	%rax, %rdi
+  210e69: be 2d 00 00 00               	movl	$0x2d, %esi
+  210e6e: e9 65 01 00 00               	jmp	0x210fd8 <main+0x748>
+  210e73: 89 c5                        	movl	%eax, %ebp
+  210e75: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210e7a: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210e7f: e8 ec 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210e84: 48 89 c3                     	movq	%rax, %rbx
+  210e87: 89 ef                        	movl	%ebp, %edi
+  210e89: e8 f2 03 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210e8e: 48 89 df                     	movq	%rbx, %rdi
+  210e91: 48 89 c6                     	movq	%rax, %rsi
+  210e94: e8 d7 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210e99: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210e9e: 48 89 c7                     	movq	%rax, %rdi
+  210ea1: e8 ca 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210ea6: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210eab: 48 89 c7                     	movq	%rax, %rdi
+  210eae: e8 bd 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210eb3: 48 89 c7                     	movq	%rax, %rdi
+  210eb6: be 3a 00 00 00               	movl	$0x3a, %esi
+  210ebb: e8 d0 03 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210ec0: 48 89 c7                     	movq	%rax, %rdi
+  210ec3: be 35 00 00 00               	movl	$0x35, %esi
+  210ec8: e9 0b 01 00 00               	jmp	0x210fd8 <main+0x748>
+  210ecd: e8 ce 03 00 00               	callq	0x2112a0 <_ZSt16__throw_bad_castv@plt>
+  210ed2: 89 c5                        	movl	%eax, %ebp
+  210ed4: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210ed9: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210ede: e8 8d 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210ee3: 48 89 c3                     	movq	%rax, %rbx
+  210ee6: 89 ef                        	movl	%ebp, %edi
+  210ee8: e8 93 03 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210eed: 48 89 df                     	movq	%rbx, %rdi
+  210ef0: 48 89 c6                     	movq	%rax, %rsi
+  210ef3: e8 78 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210ef8: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210efd: 48 89 c7                     	movq	%rax, %rdi
+  210f00: e8 6b 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210f05: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210f0a: 48 89 c7                     	movq	%rax, %rdi
+  210f0d: e8 5e 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210f12: 48 89 c7                     	movq	%rax, %rdi
+  210f15: be 3a 00 00 00               	movl	$0x3a, %esi
+  210f1a: e8 71 03 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210f1f: 48 89 c7                     	movq	%rax, %rdi
+  210f22: be 44 00 00 00               	movl	$0x44, %esi
+  210f27: e9 ac 00 00 00               	jmp	0x210fd8 <main+0x748>
+  210f2c: 89 c5                        	movl	%eax, %ebp
+  210f2e: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210f33: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210f38: e8 33 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210f3d: 48 89 c3                     	movq	%rax, %rbx
+  210f40: 89 ef                        	movl	%ebp, %edi
+  210f42: e8 39 03 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210f47: 48 89 df                     	movq	%rbx, %rdi
+  210f4a: 48 89 c6                     	movq	%rax, %rsi
+  210f4d: e8 1e 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210f52: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210f57: 48 89 c7                     	movq	%rax, %rdi
+  210f5a: e8 11 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210f5f: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210f64: 48 89 c7                     	movq	%rax, %rdi
+  210f67: e8 04 03 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210f6c: 48 89 c7                     	movq	%rax, %rdi
+  210f6f: be 3a 00 00 00               	movl	$0x3a, %esi
+  210f74: e8 17 03 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210f79: 48 89 c7                     	movq	%rax, %rdi
+  210f7c: be 45 00 00 00               	movl	$0x45, %esi
+  210f81: eb 55                        	jmp	0x210fd8 <main+0x748>
+  210f83: 89 c5                        	movl	%eax, %ebp
+  210f85: bf 20 38 21 00               	movl	$0x213820, %edi         # imm = 0x213820
+  210f8a: be 8f 0e 20 00               	movl	$0x200e8f, %esi         # imm = 0x200E8F
+  210f8f: e8 dc 02 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210f94: 48 89 c3                     	movq	%rax, %rbx
+  210f97: 89 ef                        	movl	%ebp, %edi
+  210f99: e8 e2 02 00 00               	callq	0x211280 <hipGetErrorString@plt>
+  210f9e: 48 89 df                     	movq	%rbx, %rdi
+  210fa1: 48 89 c6                     	movq	%rax, %rsi
+  210fa4: e8 c7 02 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210fa9: be d2 0e 20 00               	movl	$0x200ed2, %esi         # imm = 0x200ED2
+  210fae: 48 89 c7                     	movq	%rax, %rdi
+  210fb1: e8 ba 02 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210fb6: be 80 0e 20 00               	movl	$0x200e80, %esi         # imm = 0x200E80
+  210fbb: 48 89 c7                     	movq	%rax, %rdi
+  210fbe: e8 ad 02 00 00               	callq	0x211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+  210fc3: 48 89 c7                     	movq	%rax, %rdi
+  210fc6: be 3a 00 00 00               	movl	$0x3a, %esi
+  210fcb: e8 c0 02 00 00               	callq	0x211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>
+  210fd0: 48 89 c7                     	movq	%rax, %rdi
+  210fd3: be 46 00 00 00               	movl	$0x46, %esi
+  210fd8: e8 23 02 00 00               	callq	0x211200 <_ZNSolsEi@plt>
+  210fdd: 48 89 c7                     	movq	%rax, %rdi
+  210fe0: e8 cb 02 00 00               	callq	0x2112b0 <_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@plt>
+  210fe5: bf ff ff ff ff               	movl	$0xffffffff, %edi       # imm = 0xFFFFFFFF
+  210fea: e8 d1 02 00 00               	callq	0x2112c0 <exit@plt>
+  210fef: 90                           	nop
+
+0000000000210ff0 <__hip_module_ctor>:
+  210ff0: 48 83 ec 28                  	subq	$0x28, %rsp
+  210ff4: 48 8b 3d f5 26 00 00         	movq	0x26f5(%rip), %rdi      # 0x2136f0 <__hip_gpubin_handle>
+  210ffb: 48 85 ff                     	testq	%rdi, %rdi
+  210ffe: 75 14                        	jne	0x211014 <__hip_module_ctor+0x24>
+  211000: bf d8 f4 20 00               	movl	$0x20f4d8, %edi         # imm = 0x20F4D8
+  211005: e8 f6 02 00 00               	callq	0x211300 <__hipRegisterFatBinary@plt>
+  21100a: 48 89 c7                     	movq	%rax, %rdi
+  21100d: 48 89 05 dc 26 00 00         	movq	%rax, 0x26dc(%rip)      # 0x2136f0 <__hip_gpubin_handle>
+  211014: 0f 57 c0                     	xorps	%xmm0, %xmm0
+  211017: 0f 11 44 24 10               	movups	%xmm0, 0x10(%rsp)
+  21101c: 0f 11 04 24                  	movups	%xmm0, (%rsp)
+  211020: be 78 0e 20 00               	movl	$0x200e78, %esi         # imm = 0x200E78
+  211025: ba e0 0e 20 00               	movl	$0x200ee0, %edx         # imm = 0x200EE0
+  21102a: b9 e0 0e 20 00               	movl	$0x200ee0, %ecx         # imm = 0x200EE0
+  21102f: 41 b8 ff ff ff ff            	movl	$0xffffffff, %r8d       # imm = 0xFFFFFFFF
+  211035: 45 31 c9                     	xorl	%r9d, %r9d
+  211038: e8 d3 02 00 00               	callq	0x211310 <__hipRegisterFunction@plt>
+  21103d: bf 50 10 21 00               	movl	$0x211050, %edi         # imm = 0x211050
+  211042: 48 83 c4 28                  	addq	$0x28, %rsp
+  211046: e9 c5 00 00 00               	jmp	0x211110 <atexit>
+  21104b: 0f 1f 44 00 00               	nopl	(%rax,%rax)
+
+0000000000211050 <__hip_module_dtor>:
+  211050: 50                           	pushq	%rax
+  211051: 48 8b 3d 98 26 00 00         	movq	0x2698(%rip), %rdi      # 0x2136f0 <__hip_gpubin_handle>
+  211058: 48 85 ff                     	testq	%rdi, %rdi
+  21105b: 74 10                        	je	0x21106d <__hip_module_dtor+0x1d>
+  21105d: e8 be 02 00 00               	callq	0x211320 <__hipUnregisterFatBinary@plt>
+  211062: 48 c7 05 83 26 00 00 00 00 00 00     	movq	$0x0, 0x2683(%rip) # 0x2136f0 <__hip_gpubin_handle>
+  21106d: 58                           	popq	%rax
+  21106e: c3                           	retq
+  21106f: cc                           	int3
+
+0000000000211070 <_GLOBAL__sub_I_vector_add.hip>:
+  211070: 50                           	pushq	%rax
+  211071: bf e8 36 21 00               	movl	$0x2136e8, %edi         # imm = 0x2136E8
+  211076: e8 55 02 00 00               	callq	0x2112d0 <_ZNSt8ios_base4InitC1Ev@plt>
+  21107b: bf e0 12 21 00               	movl	$0x2112e0, %edi         # imm = 0x2112E0
+  211080: be e8 36 21 00               	movl	$0x2136e8, %esi         # imm = 0x2136E8
+  211085: ba 50 35 21 00               	movl	$0x213550, %edx         # imm = 0x213550
+  21108a: 58                           	popq	%rax
+  21108b: e9 60 02 00 00               	jmp	0x2112f0 <__cxa_atexit@plt>
+
+0000000000211090 <__libc_csu_init>:
+  211090: f3 0f 1e fa                  	endbr64
+  211094: 41 57                        	pushq	%r15
+  211096: 4c 8d 3d 93 12 00 00         	leaq	0x1293(%rip), %r15      # 0x212330 <__init_array_start>
+  21109d: 41 56                        	pushq	%r14
+  21109f: 49 89 d6                     	movq	%rdx, %r14
+  2110a2: 41 55                        	pushq	%r13
+  2110a4: 49 89 f5                     	movq	%rsi, %r13
+  2110a7: 41 54                        	pushq	%r12
+  2110a9: 41 89 fc                     	movl	%edi, %r12d
+  2110ac: 55                           	pushq	%rbp
+  2110ad: 48 8d 2d 94 12 00 00         	leaq	0x1294(%rip), %rbp      # 0x212348 <__fini>
+  2110b4: 53                           	pushq	%rbx
+  2110b5: 4c 29 fd                     	subq	%r15, %rbp
+  2110b8: 48 83 ec 08                  	subq	$0x8, %rsp
+  2110bc: e8 63 00 00 00               	callq	0x211124 <_init>
+  2110c1: 48 c1 fd 03                  	sarq	$0x3, %rbp
+  2110c5: 74 1f                        	je	0x2110e6 <__libc_csu_init+0x56>
+  2110c7: 31 db                        	xorl	%ebx, %ebx
+  2110c9: 0f 1f 80 00 00 00 00         	nopl	(%rax)
+  2110d0: 4c 89 f2                     	movq	%r14, %rdx
+  2110d3: 4c 89 ee                     	movq	%r13, %rsi
+  2110d6: 44 89 e7                     	movl	%r12d, %edi
+  2110d9: 41 ff 14 df                  	callq	*(%r15,%rbx,8)
+  2110dd: 48 83 c3 01                  	addq	$0x1, %rbx
+  2110e1: 48 39 dd                     	cmpq	%rbx, %rbp
+  2110e4: 75 ea                        	jne	0x2110d0 <__libc_csu_init+0x40>
+  2110e6: 48 83 c4 08                  	addq	$0x8, %rsp
+  2110ea: 5b                           	popq	%rbx
+  2110eb: 5d                           	popq	%rbp
+  2110ec: 41 5c                        	popq	%r12
+  2110ee: 41 5d                        	popq	%r13
+  2110f0: 41 5e                        	popq	%r14
+  2110f2: 41 5f                        	popq	%r15
+  2110f4: c3                           	retq
+  2110f5: 66 66 2e 0f 1f 84 00 00 00 00 00     	nopw	%cs:(%rax,%rax)
+
+0000000000211100 <__libc_csu_fini>:
+  211100: f3 0f 1e fa                  	endbr64
+  211104: c3                           	retq
+  211105: cc                           	int3
+  211106: cc                           	int3
+  211107: cc                           	int3
+  211108: cc                           	int3
+  211109: cc                           	int3
+  21110a: cc                           	int3
+  21110b: cc                           	int3
+  21110c: cc                           	int3
+  21110d: cc                           	int3
+  21110e: cc                           	int3
+  21110f: cc                           	int3
+
+0000000000211110 <atexit>:
+  211110: f3 0f 1e fa                  	endbr64
+  211114: 48 8b 15 35 24 00 00         	movq	0x2435(%rip), %rdx      # 0x213550 <__dso_handle>
+  21111b: 31 f6                        	xorl	%esi, %esi
+  21111d: e9 ce 01 00 00               	jmp	0x2112f0 <__cxa_atexit@plt>
+
+Disassembly of section .init:
+
+0000000000211124 <_init>:
+  211124: f3 0f 1e fa                  	endbr64
+  211128: 48 83 ec 08                  	subq	$0x8, %rsp
+  21112c: 48 8b 05 f5 13 00 00         	movq	0x13f5(%rip), %rax      # 0x212528 <vector_add.hip+0x212528>
+  211133: 48 85 c0                     	testq	%rax, %rax
+  211136: 74 02                        	je	0x21113a <_init+0x16>
+  211138: ff d0                        	callq	*%rax
+  21113a: 48 83 c4 08                  	addq	$0x8, %rsp
+  21113e: c3                           	retq
+
+Disassembly of section .fini:
+
+0000000000211140 <_fini>:
+  211140: f3 0f 1e fa                  	endbr64
+  211144: 48 83 ec 08                  	subq	$0x8, %rsp
+  211148: 48 83 c4 08                  	addq	$0x8, %rsp
+  21114c: c3                           	retq
+
+Disassembly of section .plt:
+
+0000000000211150 <.plt>:
+  211150: ff 35 0a 24 00 00            	pushq	0x240a(%rip)            # 0x213560 <_GLOBAL_OFFSET_TABLE_+0x8>
+  211156: ff 25 0c 24 00 00            	jmpq	*0x240c(%rip)           # 0x213568 <_GLOBAL_OFFSET_TABLE_+0x10>
+  21115c: 0f 1f 40 00                  	nopl	(%rax)
+
+0000000000211160 <__register_frame_info@plt>:
+  211160: ff 25 0a 24 00 00            	jmpq	*0x240a(%rip)           # 0x213570 <_GLOBAL_OFFSET_TABLE_+0x18>
+  211166: 68 00 00 00 00               	pushq	$0x0
+  21116b: e9 e0 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211170 <__cxa_finalize@plt>:
+  211170: ff 25 02 24 00 00            	jmpq	*0x2402(%rip)           # 0x213578 <_GLOBAL_OFFSET_TABLE_+0x20>
+  211176: 68 01 00 00 00               	pushq	$0x1
+  21117b: e9 d0 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211180 <__deregister_frame_info@plt>:
+  211180: ff 25 fa 23 00 00            	jmpq	*0x23fa(%rip)           # 0x213580 <_GLOBAL_OFFSET_TABLE_+0x28>
+  211186: 68 02 00 00 00               	pushq	$0x2
+  21118b: e9 c0 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211190 <__hipPopCallConfiguration@plt>:
+  211190: ff 25 f2 23 00 00            	jmpq	*0x23f2(%rip)           # 0x213588 <_GLOBAL_OFFSET_TABLE_+0x30>
+  211196: 68 03 00 00 00               	pushq	$0x3
+  21119b: e9 b0 ff ff ff               	jmp	0x211150 <.plt>
+
+00000000002111a0 <hipLaunchKernel@plt>:
+  2111a0: ff 25 ea 23 00 00            	jmpq	*0x23ea(%rip)           # 0x213590 <_GLOBAL_OFFSET_TABLE_+0x38>
+  2111a6: 68 04 00 00 00               	pushq	$0x4
+  2111ab: e9 a0 ff ff ff               	jmp	0x211150 <.plt>
+
+00000000002111b0 <malloc@plt>:
+  2111b0: ff 25 e2 23 00 00            	jmpq	*0x23e2(%rip)           # 0x213598 <_GLOBAL_OFFSET_TABLE_+0x40>
+  2111b6: 68 05 00 00 00               	pushq	$0x5
+  2111bb: e9 90 ff ff ff               	jmp	0x211150 <.plt>
+
+00000000002111c0 <hipMalloc@plt>:
+  2111c0: ff 25 da 23 00 00            	jmpq	*0x23da(%rip)           # 0x2135a0 <_GLOBAL_OFFSET_TABLE_+0x48>
+  2111c6: 68 06 00 00 00               	pushq	$0x6
+  2111cb: e9 80 ff ff ff               	jmp	0x211150 <.plt>
+
+00000000002111d0 <hipMemcpy@plt>:
+  2111d0: ff 25 d2 23 00 00            	jmpq	*0x23d2(%rip)           # 0x2135a8 <_GLOBAL_OFFSET_TABLE_+0x50>
+  2111d6: 68 07 00 00 00               	pushq	$0x7
+  2111db: e9 70 ff ff ff               	jmp	0x211150 <.plt>
+
+00000000002111e0 <__hipPushCallConfiguration@plt>:
+  2111e0: ff 25 ca 23 00 00            	jmpq	*0x23ca(%rip)           # 0x2135b0 <_GLOBAL_OFFSET_TABLE_+0x58>
+  2111e6: 68 08 00 00 00               	pushq	$0x8
+  2111eb: e9 60 ff ff ff               	jmp	0x211150 <.plt>
+
+00000000002111f0 <_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l@plt>:
+  2111f0: ff 25 c2 23 00 00            	jmpq	*0x23c2(%rip)           # 0x2135b8 <_GLOBAL_OFFSET_TABLE_+0x60>
+  2111f6: 68 09 00 00 00               	pushq	$0x9
+  2111fb: e9 50 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211200 <_ZNSolsEi@plt>:
+  211200: ff 25 ba 23 00 00            	jmpq	*0x23ba(%rip)           # 0x2135c0 <_GLOBAL_OFFSET_TABLE_+0x68>
+  211206: 68 0a 00 00 00               	pushq	$0xa
+  21120b: e9 40 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211210 <_ZNSo9_M_insertIdEERSoT_@plt>:
+  211210: ff 25 b2 23 00 00            	jmpq	*0x23b2(%rip)           # 0x2135c8 <_GLOBAL_OFFSET_TABLE_+0x70>
+  211216: 68 0b 00 00 00               	pushq	$0xb
+  21121b: e9 30 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211220 <_ZNKSt5ctypeIcE13_M_widen_initEv@plt>:
+  211220: ff 25 aa 23 00 00            	jmpq	*0x23aa(%rip)           # 0x2135d0 <_GLOBAL_OFFSET_TABLE_+0x78>
+  211226: 68 0c 00 00 00               	pushq	$0xc
+  21122b: e9 20 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211230 <_ZNSo3putEc@plt>:
+  211230: ff 25 a2 23 00 00            	jmpq	*0x23a2(%rip)           # 0x2135d8 <_GLOBAL_OFFSET_TABLE_+0x80>
+  211236: 68 0d 00 00 00               	pushq	$0xd
+  21123b: e9 10 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211240 <_ZNSo5flushEv@plt>:
+  211240: ff 25 9a 23 00 00            	jmpq	*0x239a(%rip)           # 0x2135e0 <_GLOBAL_OFFSET_TABLE_+0x88>
+  211246: 68 0e 00 00 00               	pushq	$0xe
+  21124b: e9 00 ff ff ff               	jmp	0x211150 <.plt>
+
+0000000000211250 <hipFree@plt>:
+  211250: ff 25 92 23 00 00            	jmpq	*0x2392(%rip)           # 0x2135e8 <_GLOBAL_OFFSET_TABLE_+0x90>
+  211256: 68 0f 00 00 00               	pushq	$0xf
+  21125b: e9 f0 fe ff ff               	jmp	0x211150 <.plt>
+
+0000000000211260 <free@plt>:
+  211260: ff 25 8a 23 00 00            	jmpq	*0x238a(%rip)           # 0x2135f0 <_GLOBAL_OFFSET_TABLE_+0x98>
+  211266: 68 10 00 00 00               	pushq	$0x10
+  21126b: e9 e0 fe ff ff               	jmp	0x211150 <.plt>
+
+0000000000211270 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>:
+  211270: ff 25 82 23 00 00            	jmpq	*0x2382(%rip)           # 0x2135f8 <_GLOBAL_OFFSET_TABLE_+0xa0>
+  211276: 68 11 00 00 00               	pushq	$0x11
+  21127b: e9 d0 fe ff ff               	jmp	0x211150 <.plt>
+
+0000000000211280 <hipGetErrorString@plt>:
+  211280: ff 25 7a 23 00 00            	jmpq	*0x237a(%rip)           # 0x213600 <_GLOBAL_OFFSET_TABLE_+0xa8>
+  211286: 68 12 00 00 00               	pushq	$0x12
+  21128b: e9 c0 fe ff ff               	jmp	0x211150 <.plt>
+
+0000000000211290 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@plt>:
+  211290: ff 25 72 23 00 00            	jmpq	*0x2372(%rip)           # 0x213608 <_GLOBAL_OFFSET_TABLE_+0xb0>
+  211296: 68 13 00 00 00               	pushq	$0x13
+  21129b: e9 b0 fe ff ff               	jmp	0x211150 <.plt>
+
+00000000002112a0 <_ZSt16__throw_bad_castv@plt>:
+  2112a0: ff 25 6a 23 00 00            	jmpq	*0x236a(%rip)           # 0x213610 <_GLOBAL_OFFSET_TABLE_+0xb8>
+  2112a6: 68 14 00 00 00               	pushq	$0x14
+  2112ab: e9 a0 fe ff ff               	jmp	0x211150 <.plt>
+
+00000000002112b0 <_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@plt>:
+  2112b0: ff 25 62 23 00 00            	jmpq	*0x2362(%rip)           # 0x213618 <_GLOBAL_OFFSET_TABLE_+0xc0>
+  2112b6: 68 15 00 00 00               	pushq	$0x15
+  2112bb: e9 90 fe ff ff               	jmp	0x211150 <.plt>
+
+00000000002112c0 <exit@plt>:
+  2112c0: ff 25 5a 23 00 00            	jmpq	*0x235a(%rip)           # 0x213620 <_GLOBAL_OFFSET_TABLE_+0xc8>
+  2112c6: 68 16 00 00 00               	pushq	$0x16
+  2112cb: e9 80 fe ff ff               	jmp	0x211150 <.plt>
+
+00000000002112d0 <_ZNSt8ios_base4InitC1Ev@plt>:
+  2112d0: ff 25 52 23 00 00            	jmpq	*0x2352(%rip)           # 0x213628 <_GLOBAL_OFFSET_TABLE_+0xd0>
+  2112d6: 68 17 00 00 00               	pushq	$0x17
+  2112db: e9 70 fe ff ff               	jmp	0x211150 <.plt>
+
+00000000002112e0 <_ZNSt8ios_base4InitD1Ev@plt>:
+  2112e0: ff 25 4a 23 00 00            	jmpq	*0x234a(%rip)           # 0x213630 <_GLOBAL_OFFSET_TABLE_+0xd8>
+  2112e6: 68 18 00 00 00               	pushq	$0x18
+  2112eb: e9 60 fe ff ff               	jmp	0x211150 <.plt>
+
+00000000002112f0 <__cxa_atexit@plt>:
+  2112f0: ff 25 42 23 00 00            	jmpq	*0x2342(%rip)           # 0x213638 <_GLOBAL_OFFSET_TABLE_+0xe0>
+  2112f6: 68 19 00 00 00               	pushq	$0x19
+  2112fb: e9 50 fe ff ff               	jmp	0x211150 <.plt>
+
+0000000000211300 <__hipRegisterFatBinary@plt>:
+  211300: ff 25 3a 23 00 00            	jmpq	*0x233a(%rip)           # 0x213640 <_GLOBAL_OFFSET_TABLE_+0xe8>
+  211306: 68 1a 00 00 00               	pushq	$0x1a
+  21130b: e9 40 fe ff ff               	jmp	0x211150 <.plt>
+
+0000000000211310 <__hipRegisterFunction@plt>:
+  211310: ff 25 32 23 00 00            	jmpq	*0x2332(%rip)           # 0x213648 <_GLOBAL_OFFSET_TABLE_+0xf0>
+  211316: 68 1b 00 00 00               	pushq	$0x1b
+  21131b: e9 30 fe ff ff               	jmp	0x211150 <.plt>
+
+0000000000211320 <__hipUnregisterFatBinary@plt>:
+  211320: ff 25 2a 23 00 00            	jmpq	*0x232a(%rip)           # 0x213650 <_GLOBAL_OFFSET_TABLE_+0xf8>
+  211326: 68 1c 00 00 00               	pushq	$0x1c
+  21132b: e9 20 fe ff ff               	jmp	0x211150 <.plt>
