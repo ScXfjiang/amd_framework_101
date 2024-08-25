@@ -22,7 +22,7 @@ __global__ void AddArrays(float *a, float *b, float *c, int n) {
 }
 
 int main() {
-  int n = 100;
+  int n = 1024;
   size_t size = n * sizeof(float);
 
   // allocate memory on the host (CPU)
