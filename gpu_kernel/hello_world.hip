@@ -17,7 +17,9 @@ constexpr int error_exit_code = -1;
   }
 
 __global__ void hello_world() {
-  printf("Hello World from Thread Block %u Thread %u!\n", blockIdx.x, threadIdx.x);
+  unsigned int block_idx = blockIdx.x;
+  unsigned int thread_idx = threadIdx.x;
+  printf("Hello World from Thread Block %u Thread %u!\n", block_idx, thread_idx);
 }
 
 int main() {
