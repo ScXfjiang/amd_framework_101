@@ -1,0 +1,86 @@
+#0  0x00007ffe499a6218 in xla::gpu::GpuCompiler::RunHloPasses(std::unique_ptr<xla::HloModule, std::default_delete<xla::HloModule> >, stream_executor::StreamExecutor*, xla::Compiler::CompileOptions const&) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#1  0x00007ffe49917109 in xla::Service::BuildExecutable(xla::HloModuleProto const&, std::unique_ptr<xla::HloModuleConfig, std::default_delete<xla::HloModuleConfig> >, xla::Backend*, stream_executor::StreamExecutor*, xla::Compiler::CompileOptions const&, bool) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#2  0x00007ffe498b9842 in xla::LocalService::CompileExecutables(xla::XlaComputation const&, absl::lts_20230802::Span<xla::Shape const* const>, xla::ExecutableBuildOptions const&) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#3  0x00007ffe4989db28 in xla::LocalClient::Compile(xla::XlaComputation const&, absl::lts_20230802::Span<xla::Shape const* const>, xla::ExecutableBuildOptions const&) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#4  0x00007ffe49845f1f in xla::PjRtStreamExecutorClient::Compile(xla::XlaComputation const&, xla::CompileOptions) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#5  0x00007ffe497d7d97 in xla::StreamExecutorGpuClient::Compile(xla::XlaComputation const&, xla::CompileOptions) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#6  0x00007ffe4985c0cd in xla::PjRtStreamExecutorClient::Compile(mlir::ModuleOp, xla::CompileOptions) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#7  0x00007ffe4976c6ee in auto pjrt::PJRT_Client_Compile(PJRT_Client_Compile_Args*)::{lambda(auto:1&)#1}::operator()<mlir::OwningOpRef<mlir::ModuleOp> >(mlir::OwningOpRef<mlir::ModuleOp>&) const [clone .isra.0] () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#8  0x00007ffe4976c750 in std::__detail::__variant::__gen_vtable_impl<true, std::__detail::__variant::_Multi_array<absl::lts_20230802::StatusOr<std::unique_ptr<xla::PjRtLoadedExecutable, std::default_delete<xla::PjRtLoadedExecutable> > > (*)(pjrt::PJRT_Client_Compile(PJRT_Client_Compile_Args*)::{lambda(auto:1&)#1}&&, std::variant<mlir::OwningOpRef<mlir::ModuleOp>, xla::XlaComputation>&)>, std::tuple<std::variant<mlir::OwningOpRef<mlir::ModuleOp>, xla::XlaComputation>&>, std::integer_sequence<unsigned long, 0ul> >::__visit_invoke(pjrt::PJRT_Client_Compile(PJRT_Client_Compile_Args*)::{lambda(auto:1&)#1}&&, std::variant<mlir::OwningOpRef<mlir::ModuleOp>, xla::XlaComputation>&) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#9  0x00007ffe4977244d in pjrt::PJRT_Client_Compile(PJRT_Client_Compile_Args*) () from /usr/local/lib/python3.11/dist-packages/jax_plugins/xla_rocm60/xla_rocm_plugin.so
+#10 0x00007fff41d8a34f in xla::InitializeArgsAndCompile(xla::PjRtCApiClient*, PJRT_Api const*, PJRT_Client*, xla::CompileOptions const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#11 0x00007fff41d8a887 in xla::PjRtCApiClient::Compile(mlir::ModuleOp, xla::CompileOptions) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#12 0x00007fff4849eb73 in xla::ifrt::PjRtLoadedExecutable::Create(xla::ifrt::PjRtCompatibleClient*, mlir::ModuleOp, xla::CompileOptions, std::vector<tsl::RCReference<xla::ifrt::LoadedHostCallback>, std::allocator<tsl::RCReference<xla::ifrt::LoadedHostCallback> > >) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#13 0x00007fff484a2476 in xla::ifrt::PjRtCompiler::Compile(std::unique_ptr<xla::ifrt::Program, std::default_delete<xla::ifrt::Program> >, std::unique_ptr<xla::ifrt::CompileOptions, std::default_delete<xla::ifrt::CompileOptions> >) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#14 0x00007fff4797ae37 in xla::PyClient::CompileIfrtProgram(xla::nb_class_ptr<xla::PyClient>, std::unique_ptr<xla::ifrt::Program, std::default_delete<xla::ifrt::Program> >, std::unique_ptr<xla::ifrt::CompileOptions, std::default_delete<xla::ifrt::CompileOptions> >) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#15 0x00007fff4797bcd4 in xla::PyClient::Compile(xla::nb_class_ptr<xla::PyClient>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, xla::CompileOptions, std::vector<nanobind::capsule, std::allocator<nanobind::capsule> >) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#16 0x00007fff4797c459 in nanobind::detail::func_create<false, true, xla::PyClient::RegisterPythonTypes(nanobind::module_&)::{lambda(xla::nb_class_ptr<xla::PyClient>, nanobind::bytes, xla::CompileOptions, std::vector<nanobind::capsule, std::allocator<nanobind::capsule> >)#2}, xla::nb_class_ptr<xla::PyLoadedExecutable>, xla::nb_class_ptr<xla::PyClient>, nanobind::bytes, xla::CompileOptions, std::vector<nanobind::capsule, std::allocator<nanobind::capsule> >, 0ul, 1ul, 2ul, 3ul, nanobind::scope, nanobind::name, nanobind::is_method, nanobind::arg, nanobind::arg_v, nanobind::arg_v>(xla::PyClient::RegisterPythonTypes(nanobind::module_&)::{lambda(xla::nb_class_ptr<xla::PyClient>, nanobind::bytes, xla::CompileOptions, std::vector<nanobind::capsule, std::allocator<nanobind::capsule> >)#2}&&, xla::nb_class_ptr<xla::PyLoadedExecutable> (*)(xla::nb_class_ptr<xla::PyClient>, nanobind::bytes, xla::CompileOptions, std::vector<nanobind::capsule, std::allocator<nanobind::capsule> >), std::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul>, nanobind::scope const&, nanobind::name const&, nanobind::is_method const&, nanobind::arg const&, nanobind::arg_v const&, nanobind::arg_v const&)::{lambda(void*, _object**, unsigned char*, nanobind::rv_policy, nanobind::detail::cleanup_list*)#1}::operator()(void*, _object**, unsigned char*, nanobind::rv_policy, nanobind::detail::cleanup_list*) const [clone .isra.0] () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#17 0x00007fff48472131 in nanobind::detail::nb_func_vectorcall_complex(_object*, _object* const*, unsigned long, _object*) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#18 0x00007fffec85d578 in nanobind::detail::nb_bound_method_vectorcall(_object*, _object* const*, unsigned long, _object*) () from /usr/local/lib/python3.11/dist-packages/jaxlib/utils.so
+#19 0x000000000063bd35 in PyObject_Vectorcall ()
+#20 0x000000000058ee33 in _PyEval_EvalFrameDefault ()
+#21 0x00000000006378bf in _PyFunction_Vectorcall ()
+#22 0x0000000000639057 in PyObject_Call ()
+#23 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#24 0x00000000006378bf in _PyFunction_Vectorcall ()
+#25 0x000000000063bd35 in PyObject_Vectorcall ()
+#26 0x00007fff48463e1f in nanobind::detail::obj_vectorcall(_object*, _object* const*, unsigned long, _object*, bool) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#27 0x00007fff41d34ce1 in nanobind::object nanobind::detail::api<nanobind::handle>::operator()<(nanobind::rv_policy)1, nanobind::object&, nanobind::detail::args_proxy, nanobind::detail::kwargs_proxy>(nanobind::object&, nanobind::detail::args_proxy&&, nanobind::detail::kwargs_proxy&&) const () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#28 0x00007fff41d37be8 in jax::WeakrefLRUCache::Call(nanobind::object, nanobind::args, nanobind::kwargs) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#29 0x00007fff41d33c0e in nanobind::detail::func_create<false, true, nanobind::cpp_function_def<nanobind::object, jax::WeakrefLRUCache, nanobind::object, nanobind::args, nanobind::kwargs, nanobind::scope, nanobind::name, nanobind::is_method>(nanobind::object (jax::WeakrefLRUCache::*)(nanobind::object, nanobind::args, nanobind::kwargs), nanobind::scope const&, nanobind::name const&, nanobind::is_method const&)::{lambda(jax::WeakrefLRUCache*, nanobind::object, nanobind::args, nanobind::kwargs)#1}, nanobind::object, jax::WeakrefLRUCache*, nanobind::object, nanobind::args, nanobind::kwargs, 0ul, 1ul, 2ul, 3ul, nanobind::scope, nanobind::name, nanobind::is_method>(nanobind::cpp_function_def<nanobind::object, jax::WeakrefLRUCache, nanobind::object, nanobind::args, nanobind::kwargs, nanobind::scope, nanobind::name, nanobind::is_method>(nanobind::object (jax::WeakrefLRUCache::*)(nanobind::object, nanobind::args, nanobind::kwargs), nanobind::scope const&, nanobind::name const&, nanobind::is_method const&)::{lambda(jax::WeakrefLRUCache*, nanobind::object, nanobind::args, nanobind::kwargs)#1}&&, nanobind::object (*)(jax::WeakrefLRUCache*, nanobind::object, nanobind::args, nanobind::kwargs), std::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul>, nanobind::scope const&, nanobind::name const&, nanobind::is_method const&)::{lambda(void*, _object**, unsigned char*, nanobind::rv_policy, nanobind::detail::cleanup_list*)#1}::_FUN(void*, _object**, unsigned char*, nanobind::rv_policy, nanobind::detail::cleanup_list*) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#30 0x00007fff48472131 in nanobind::detail::nb_func_vectorcall_complex(_object*, _object* const*, unsigned long, _object*) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#31 0x000000000063c23f in _PyObject_FastCallDictTstate ()
+#32 0x000000000063c82f in _PyObject_Call_Prepend ()
+#33 0x00000000006fb337 in ?? ()
+#34 0x000000000063939d in _PyObject_MakeTpCall ()
+#35 0x000000000058ee33 in _PyEval_EvalFrameDefault ()
+#36 0x0000000000637c1e in _PyFunction_Vectorcall ()
+#37 0x00000000006390f4 in PyObject_Call ()
+#38 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#39 0x0000000000637c1e in _PyFunction_Vectorcall ()
+#40 0x00000000006390f4 in PyObject_Call ()
+#41 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#42 0x0000000000637c1e in _PyFunction_Vectorcall ()
+#43 0x000000000063bd35 in PyObject_Vectorcall ()
+#44 0x00007fff41c4618c in jax::(anonymous namespace)::PjitFunction::Call(nanobind::handle, _object* const*, unsigned long, _object*) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#45 0x00007fff41c47577 in PjitFunction_tp_vectorcall () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#46 0x0000000000639057 in PyObject_Call ()
+#47 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#48 0x0000000000637c1e in _PyFunction_Vectorcall ()
+#49 0x00000000006390f4 in PyObject_Call ()
+#50 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#51 0x00000000005656fe in ?? ()
+#52 0x0000000000639b49 in ?? ()
+#53 0x00000000006390f4 in PyObject_Call ()
+#54 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#55 0x0000000000637c1e in _PyFunction_Vectorcall ()
+#56 0x0000000000639057 in PyObject_Call ()
+#57 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#58 0x0000000000637c1e in _PyFunction_Vectorcall ()
+#59 0x0000000000639057 in PyObject_Call ()
+#60 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#61 0x0000000000637c1e in _PyFunction_Vectorcall ()
+#62 0x000000000063bd35 in PyObject_Vectorcall ()
+#63 0x00007fff41c4618c in jax::(anonymous namespace)::PjitFunction::Call(nanobind::handle, _object* const*, unsigned long, _object*) () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#64 0x00007fff41c47577 in PjitFunction_tp_vectorcall () from /usr/local/lib/python3.11/dist-packages/jaxlib/xla_extension.so
+#65 0x0000000000639057 in PyObject_Call ()
+#66 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#67 0x0000000000637c1e in _PyFunction_Vectorcall ()
+#68 0x000000000052d3a9 in ?? ()
+#69 0x000000000066f504 in ?? ()
+#70 0x00000000006390f4 in PyObject_Call ()
+#71 0x0000000000592eb1 in _PyEval_EvalFrameDefault ()
+#72 0x00000000006e14ff in ?? ()
+#73 0x00000000006e1787 in PyEval_EvalCode ()
+#74 0x00000000006bb737 in ?? ()
+#75 0x00000000006bb7c0 in ?? ()
+#76 0x00000000006bb9db in ?? ()
+#77 0x00000000006bbfa4 in _PyRun_SimpleFileObject ()
+#78 0x00000000006bc067 in _PyRun_AnyFileObject ()
+#79 0x00000000006b3dcc in Py_RunMain ()
+#80 0x00000000006b3f7d in Py_BytesMain ()
+#81 0x00007ffff7ded083 in __libc_start_main (main=0x52bdf0, argc=2, argv=0x7fffffffeba8, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7fffffffeb98) at ../csu/libc-start.c:308
+#82 0x0000000000669dce in _start ()
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
