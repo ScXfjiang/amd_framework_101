@@ -1,6 +1,21 @@
 #include <hip/hip_runtime.h>
 #include <iostream>
 
+constexpr int error_exit_code = -1;
+
+/// \brief Checks if the provided error code is \p hipSuccess and if not,
+/// prints an error message to the standard error output and terminates the program
+/// with an error code.
+#define HIP_CHECK(condition)                                                                      \
+  {                                                                                               \
+    const hipError_t error = condition;                                                           \
+    if (error != hipSuccess) {                                                                    \
+      std::cerr << "An error encountered: \"" << hipGetErrorString(error) << "\" at " << __FILE__ \
+                << ':' << __LINE__ << std::endl;                                                  \
+      std::exit(error_exit_code);                                                                 \
+    }                                                                                             \
+  }
+
 __global__ void SineKernel(float *input, float *output, int n) {
   int idx = blockIdx.x * blockDim.x + threadIdx.x;
   if (idx < n) { output[idx] = __sinf(input[idx]); }
@@ -8,43 +23,39 @@ __global__ void SineKernel(float *input, float *output, int n) {
 
 int main() {
   int n = 1024;
-  float *input, *output;
+  size_t size = n * sizeof(float);
+
+  // allocate memory on the host (CPU)
+  float *h_input = (float *)malloc(size);
+  float *h_output = (float *)malloc(size);
+  for (int i = 0; i < n; i++) { h_input[i] = i * 0.1f; }
+
+  // allocate memory on the device (GPU)
   float *d_input, *d_output;
-
-  // Allocate host memory
-  input = new float[n];
-  output = new float[n];
-
-  // Initialize input data
-  for (int i = 0; i < n; i++) {
-    input[i] = i * 0.1f;  // Example values
-  }
-
-  // Allocate device memory
-  hipMalloc(&d_input, n * sizeof(float));
-  hipMalloc(&d_output, n * sizeof(float));
+  HIP_CHECK(hipMalloc(&d_input, n * sizeof(float)));
+  HIP_CHECK(hipMalloc(&d_output, n * sizeof(float)));
 
   // Copy data from host to device
-  hipMemcpy(d_input, input, n * sizeof(float), hipMemcpyHostToDevice);
+  HIP_CHECK(hipMemcpy(d_input, h_input, n * sizeof(float), hipMemcpyHostToDevice));
 
   // Launch the kernel
   SineKernel<<<(n + 255) / 256, 256>>>(d_input, d_output, n);
 
   // Copy result back to host
-  hipMemcpy(output, d_output, n * sizeof(float), hipMemcpyDeviceToHost);
+  HIP_CHECK(hipMemcpy(h_output, d_output, n * sizeof(float), hipMemcpyDeviceToHost));
 
-  // Print some of the results
+  // verify the result
   for (int i = 0; i < 10; i++) {
-    std::cout << "sin(" << input[i] << ") = " << output[i] << std::endl;
+    std::cout << "sin(" << h_input[i] << ") = " << h_output[i] << std::endl;
   }
 
-  // Free device memory
-  hipFree(d_input);
-  hipFree(d_output);
+  // free device memory
+  HIP_CHECK(hipFree(d_input));
+  HIP_CHECK(hipFree(d_output));
 
-  // Free host memory
-  delete[] input;
-  delete[] output;
+  // free host memory
+  free(h_input);
+  free(h_output);
 
   return 0;
 }
