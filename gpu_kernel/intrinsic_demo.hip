@@ -16,9 +16,9 @@ constexpr int error_exit_code = -1;
     }                                                                                             \
   }
 
-__global__ void SineKernel(float *input, float *output, int n) {
+__global__ void SqrtKernel(float *input, float *output, int n) {
   int idx = blockIdx.x * blockDim.x + threadIdx.x;
-  if (idx < n) { output[idx] = __sinf(input[idx]); }
+  if (idx < n) { output[idx] = __builtin_amdgcn_sqrt(input[idx]); }
 }
 
 int main() {
@@ -28,7 +28,7 @@ int main() {
   // allocate memory on the host (CPU)
   float *h_input = (float *)malloc(size);
   float *h_output = (float *)malloc(size);
-  for (int i = 0; i < n; i++) { h_input[i] = i * 0.1f; }
+  for (int i = 0; i < n; i++) { h_input[i] = i; }
 
   // allocate memory on the device (GPU)
   float *d_input, *d_output;
@@ -39,7 +39,7 @@ int main() {
   HIP_CHECK(hipMemcpy(d_input, h_input, n * sizeof(float), hipMemcpyHostToDevice));
 
   // Launch the kernel
-  SineKernel<<<(n + 255) / 256, 256>>>(d_input, d_output, n);
+  SqrtKernel<<<(n + 255) / 256, 256>>>(d_input, d_output, n);
 
   // Copy result back to host
   HIP_CHECK(hipMemcpy(h_output, d_output, n * sizeof(float), hipMemcpyDeviceToHost));
