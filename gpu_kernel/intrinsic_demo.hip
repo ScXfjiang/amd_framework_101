@@ -35,13 +35,13 @@ int main() {
   HIP_CHECK(hipMalloc(&d_input, n * sizeof(float)));
   HIP_CHECK(hipMalloc(&d_output, n * sizeof(float)));
 
-  // Copy data from host to device
+  // copy data from host to device
   HIP_CHECK(hipMemcpy(d_input, h_input, n * sizeof(float), hipMemcpyHostToDevice));
 
-  // Launch the kernel
+  // launch the kernel
   SqrtKernel<<<(n + 255) / 256, 256>>>(d_input, d_output, n);
 
-  // Copy result back to host
+  // copy result back to host
   HIP_CHECK(hipMemcpy(h_output, d_output, n * sizeof(float), hipMemcpyDeviceToHost));
 
   // verify the result
