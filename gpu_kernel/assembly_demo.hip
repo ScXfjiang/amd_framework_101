@@ -1,5 +1,5 @@
 #include <hip/hip_runtime.h>
-#include <stdio.h>
+#include <iostream>
 
 constexpr int error_exit_code = -1;
 
@@ -23,36 +23,36 @@ __global__ void AddKernel(float *c, const float *a, const float *b, int size) {
 
 int main() {
   const int n = 5;
+
+  // allocate memory on the host (CPU)
   float a[n] = {1.0, 2.0, 3.0, 4.0, 5.0};
   float b[n] = {10.0, 10.0, 10.0, 10.0, 10.0};
   float c[n] = {0};
 
+  // allocate memory on the device (GPU)
   float *d_a = 0;
   float *d_b = 0;
   float *d_c = 0;
+  HIP_CHECK(hipMalloc((void **)&d_c, n * sizeof(float)));
+  HIP_CHECK(hipMalloc((void **)&d_a, n * sizeof(float)));
+  HIP_CHECK(hipMalloc((void **)&d_b, n * sizeof(float)));
 
-  // Allocate GPU buffers for three vectors (two input, one output)
-  hipMalloc((void **)&d_c, n * sizeof(float));
-  hipMalloc((void **)&d_a, n * sizeof(float));
-  hipMalloc((void **)&d_b, n * sizeof(float));
+  // copy data from host to device
+  HIP_CHECK(hipMemcpy(d_a, a, n * sizeof(float), hipMemcpyHostToDevice));
+  HIP_CHECK(hipMemcpy(d_b, b, n * sizeof(float), hipMemcpyHostToDevice));
 
-  // Copy input vectors from host memory to GPU buffers
-  hipMemcpy(d_a, a, n * sizeof(float), hipMemcpyHostToDevice);
-  hipMemcpy(d_b, b, n * sizeof(float), hipMemcpyHostToDevice);
-
-  // Launch a kernel on the GPU with one thread for each element
+  // launch the kernel
   AddKernel<<<1, n>>>(d_c, d_a, d_b, n);
 
-  // Copy output vector from GPU buffer to host memory
-  hipMemcpy(c, d_c, n * sizeof(int), hipMemcpyDeviceToHost);
+  // copy result back to host
+  HIP_CHECK(hipMemcpy(c, d_c, n * sizeof(int), hipMemcpyDeviceToHost));
 
   printf("Results:\n");
   for (int i = 0; i < n; i++) { printf("%f + %f = %f\n", a[i], b[i], c[i]); }
-
-  // Cleanup
-  hipFree(d_c);
-  hipFree(d_a);
-  hipFree(d_b);
+  
+  HIP_CHECK(hipFree(d_c));
+  HIP_CHECK(hipFree(d_a));
+  HIP_CHECK(hipFree(d_b));
 
   return 0;
 }
