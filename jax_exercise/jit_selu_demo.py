@@ -1,3 +1,7 @@
+import os
+# enable kernel fusion for rocm
+os.environ["XLA_FLAGS"] = "--xla_dump_to=./xla_dump --xla_dump_hlo_as_dot"
+
 import jax
 import jax.numpy as jnp
 from jax import jit
