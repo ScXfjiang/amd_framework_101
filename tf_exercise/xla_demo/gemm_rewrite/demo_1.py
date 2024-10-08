@@ -14,7 +14,7 @@ import tensorflow as tf
 def matmul_demo():
     m1 = tf.constant([[1.0, 2.0], [3.0, 4.0]], tf.float32)
     m2 = tf.constant([[5.0, 6.0], [7.0, 8.0]], tf.float32)
-    c = tf.constant(1.0, tf.float32)
+    c = tf.constant(3.0, tf.float32)
     return c * tf.matmul(m1, m2)
 
 res = matmul_demo()
