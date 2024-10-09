@@ -43,6 +43,5 @@ if __name__ == "__main__":
     scale_z = tf.constant(4.0, dtype=tf.float16)
     z_fp8, z_max = fp8_matmul(x_fp8, y_fp8, scale_x, scale_y, scale_z)
     print(z_fp8)
-    print(z_max)
 
     assert(np.allclose(z_fp16, tf.cast(z_fp8, tf.float16)))
