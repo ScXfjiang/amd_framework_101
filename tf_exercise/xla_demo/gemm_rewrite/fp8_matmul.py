@@ -8,7 +8,7 @@ os.environ["XLA_FLAGS"] = (
     "--xla_dump_hlo_as_dot "
     "--xla_dump_hlo_as_text "
     "--xla_dump_hlo_as_html "
-    "--xla_dump_hlo_pass_re=.*"
+    # "--xla_dump_hlo_pass_re=.*"
 )
 
 import tensorflow as tf
@@ -26,7 +26,7 @@ def fp8_matmul(x_fp8, y_fp8, scale_x, scale_y, scale_z):
     z_fp8 = tf.cast(z_fp16_unscaled / scale_z, tf.dtypes.experimental.float8_e4m3fnuz)
     return z_fp8, z_max
 
-@tf.function(jit_compile=True)
+@tf.function(jit_compile=False)
 def fp16_matmul(x_fp16, y_fp16):
     return tf.matmul(x_fp16, y_fp16)
 
