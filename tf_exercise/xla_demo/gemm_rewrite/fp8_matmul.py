@@ -21,9 +21,10 @@ def fp8_matmul(x_fp8, y_fp8, scale_x, scale_y, scale_z):
     y_fp16_unscaled = tf.cast(y_fp8, tf.float16) * scale_y
     # 2. perform matmul in fp16
     z_fp16_unscaled = tf.matmul(x_fp16_unscaled, y_fp16_unscaled)
+    z_max = tf.reduce_max(tf.abs(z_fp16_unscaled))
     # 3. quantize z_fp16 to fp8
     z_fp8 = tf.cast(z_fp16_unscaled / scale_z, tf.dtypes.experimental.float8_e4m3fnuz)
-    return z_fp8
+    return z_fp8, z_max
 
 @tf.function(jit_compile=True)
 def fp16_matmul(x_fp16, y_fp16):
@@ -40,7 +41,8 @@ if __name__ == "__main__":
     scale_x = tf.constant(2.0, dtype=tf.float16)
     scale_y = tf.constant(2.0, dtype=tf.float16)
     scale_z = tf.constant(4.0, dtype=tf.float16)
-    z_fp8 = fp8_matmul(x_fp8, y_fp8, scale_x, scale_y, scale_z)
+    z_fp8, z_max = fp8_matmul(x_fp8, y_fp8, scale_x, scale_y, scale_z)
     print(z_fp8)
+    print(z_max)
 
     assert(np.allclose(z_fp16, tf.cast(z_fp8, tf.float16)))
